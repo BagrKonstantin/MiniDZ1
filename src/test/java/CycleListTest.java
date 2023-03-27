@@ -4,10 +4,11 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.AssertJUnit.*;
 
-public final class CycleListTester {
-    private final CycleList<Integer> cycleList1 = new CycleList(new ArrayList<Integer>() {
+public final class CycleListTest {
+    private final CycleList<Integer> cycleList1 = new CycleList<>(new ArrayList<>() {
         {
             add(1);
             add(2);
@@ -17,7 +18,7 @@ public final class CycleListTester {
 
     private final CycleList cycleList2 = new CycleList();
 
-    private final CycleList<Integer> cycleList3 = new CycleList(new ArrayList<Integer>() {
+    private final CycleList<Integer> cycleList3 = new CycleList<>(new ArrayList<>() {
         {
             add(2);
             add(3);
@@ -25,14 +26,14 @@ public final class CycleListTester {
         }
     });
 
-    private final CycleList<Integer> cycleList4 = new CycleList(new ArrayList<Integer>() {
+    private final CycleList<Integer> cycleList4 = new CycleList<>(new ArrayList<>() {
         {
             add(2);
             add(1);
         }
     });
 
-    private final CycleList<String> cycleList5 = new CycleList(new ArrayList<String>() {
+    private final CycleList<String> cycleList5 = new CycleList<>(new ArrayList<>() {
         {
             add("a");
             add("Bab");
@@ -49,13 +50,13 @@ public final class CycleListTester {
     @Test
     @Order(2)
     public void noMatchingSizesTest() {
-        assertTrue(!cycleList1.equals(cycleList2));
+        assertNotEquals(cycleList1, cycleList2);
     }
 
     @Test
     @Order(3)
     public void testEqualsDifferentTypes() {
-        assertTrue(!cycleList1.equals(cycleList2));
+        assertNotEquals(cycleList1, cycleList2);
     }
 
 
